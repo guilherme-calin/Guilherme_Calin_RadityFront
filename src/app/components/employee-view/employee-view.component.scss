@@ -1,0 +1,18 @@
+.form-container {
+  margin-top: 16px;
+}
+
+.add-address-option {
+  text-align: end;
+  transition: opacity 0.25s linear;
+  cursor: pointer;
+  color: #007bff;
+
+  &:hover {
+    opacity: 0.7;
+  };
+}
+
+label {
+  font-weight: bold;
+}

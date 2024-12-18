@@ -1,0 +1,21 @@
+.spinner-layout {
+  margin-bottom: 16px;
+}
+
+.button-container span {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.table-container {
+  margin-top: 32px;
+  margin-bottom: 32px;
+
+  & * {
+    font-size: 18px;
+  }
+}
+
+th, td {
+  text-align: center;
+}

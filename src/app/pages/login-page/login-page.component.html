@@ -1,0 +1,40 @@
+<div class="header-container">
+  <p class="header-title">MyEmployee</p>
+</div>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body login-card-wrapper">
+          <p class="login-card-title">Login</p>
+          <form (ngSubmit)="onLogin()">
+            <div class="login-input-wrapper">
+              <label for="username" class="form-label">Username</label>
+              <input type="text" class="form-control" id="username" name="username" [(ngModel)]="username" placeholder="Enter username">
+            </div>
+
+            <div class="login-input-wrapper">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control" id="password" name="password" [(ngModel)]="password" placeholder="Enter password">
+            </div>
+
+            <div class="row button-wrapper" style="text-align: center">
+              <div class="col-12">
+                <button [disabled]="loading || username.trim().length === 0 || password.trim().length === 0" type="submit" class="btn btn-lg btn-success" style="min-width: 35%; height: 100%">
+                  @if (loading) {
+                    <div class="spinner-border text-light" style="vertical-align: center; height: 24px; width: 24px; padding-top: 4px" role="status">
+                    </div>
+                  }
+                  @if (!loading) {
+                  Login
+                  }
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

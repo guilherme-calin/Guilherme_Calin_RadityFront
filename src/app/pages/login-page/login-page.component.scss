@@ -1,0 +1,34 @@
+$font-size:18px;
+
+input {
+  font-size: $font-size;
+}
+
+.header-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 5%;
+}
+
+.header-title {
+  font-size: 36px;
+}
+
+.login-card-title {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.login-input-wrapper {
+  margin-bottom: 16px;
+}
+
+.login-card-wrapper {
+  background-color: #FAFAFA;
+  padding-bottom: 0;
+}
+
+.button-wrapper {
+  margin: 32px 0;
+}

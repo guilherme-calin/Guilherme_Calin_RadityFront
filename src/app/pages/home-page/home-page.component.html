@@ -1,0 +1,93 @@
+@if (myUserName) {
+  <p class="username-text">{{myUserName}}</p>
+}
+
+<p class="header-text">Employee List</p>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div [ngClass]="responsiveClasses">
+      <hr>
+    </div>
+  </div>
+</div>
+
+@if (showAdminOptions) {
+  <div class="container">
+    <div class="row justify-content-center">
+      <div [ngClass]="responsiveClasses">
+        <div class="row justify-content-center">
+          <div class="col-4">
+            <button type="button" class="btn btn-primary" (click)="onAddEmployeeHandler()">
+              <span>Add Employee</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+}
+
+<div class="container table-container">
+  <div class="row justify-content-center">
+    <div [ngClass]="responsiveClasses">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Job Title</th>
+          <th>Start Date</th>
+          <th>Options</th>
+        </tr>
+        </thead>
+          @if (!tableLoading && employeeList.length === 0) {
+            <tbody>
+              <tr>
+                <td>Empty List</td>
+              </tr>
+            </tbody>
+          }
+          @if (!tableLoading && employeeList.length > 0) {
+            <tbody>
+            @for (employee of employeeList; track employee.id) {
+              <tr>
+                <td>{{ employee.firstName }}</td>
+                <td>{{ employee.lastName }}</td>
+                <td>{{ employee.jobTitle }}</td>
+                <td>{{ employee.startDate }}</td>
+                <td>
+                  <button type="button" class="btn btn-primary" (click)="onDetailsHandler(employee.id)" [disabled]="!showAdminOptions && myEmployeeId !== employee.id">
+                  <span>Details</span>
+                  </button>
+                </td>
+              </tr>
+            }
+            </tbody>
+          }
+      </table>
+    </div>
+  </div>
+</div>
+
+@if (tableLoading) {
+  <div class="row justify-content-center">
+    <div [ngClass]="responsiveClasses">
+      <div style="display: flex; justify-content: center; align-items: center">
+        <div class="spinner-border text-primary table-spinner spinner-layout">
+        </div>
+      </div>
+    </div>
+  </div>
+}
+
+<div style="display: flex; justify-content: center">
+  <ngb-pagination
+    [collectionSize]="totalDataCount"
+    [(page)]="currentPage"
+    [pageSize]="pageSize"
+    (pageChange)="loadEmployeesFromAPI()"
+    [disabled]="tableLoading"
+    aria-label="Default pagination"
+  />
+</div>

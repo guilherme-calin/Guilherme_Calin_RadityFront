@@ -1,0 +1,224 @@
+<p class="header-text">Add Employee</p>
+
+@if (loading) {
+  <div class="spinner-container">
+    <div class="spinner-border text-primary spinner-config" role="status">
+    </div>
+  </div>
+}
+
+@if (!loading) {
+  <div class="container">
+    <div class="row justify-content-center">
+      <div [ngClass]="responsiveClasses">
+        <hr>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div [ngClass]="responsiveClasses">
+        <div style="display: flex; justify-content: space-between">
+          <button type="button" (click)="goBack()" class="btn btn-lg btn-secondary">
+            @if (operation === EmployeeOperations.View) {
+              Go Back
+            }
+            @if (operation === EmployeeOperations.Create) {
+              Cancel
+            }
+          </button>
+
+          @if (operation === EmployeeOperations.Create) {
+            <button type="button" (click)="save()" class="btn btn-lg btn-success">Save</button>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container form-container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-md-10">
+        <form [formGroup]="employeeFormGroup">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="firstName" class="form-label">First Name</label>
+                <input type="text" class="form-control" id="firstName" formControlName="firstName">
+                @if (employeeFormGroup.get('firstName')?.hasError('required') && employeeFormGroup.get('firstName')?.touched) {
+                  <div class="text-danger">
+                    First Name is required
+                  </div>
+                }
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="lastName" class="form-label">Last Name</label>
+                <input type="text" class="form-control" id="lastName" formControlName="lastName">
+                @if (employeeFormGroup.get('lastName')?.hasError('required') && employeeFormGroup.get('lastName')?.touched) {
+                  <div class="text-danger">
+                    Last Name is required
+                  </div>
+                }
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="birthDate" class="form-label">Birth Date</label>
+                <input type="date" class="form-control" id="birthDate" formControlName="birthDate">
+                @if (employeeFormGroup.get('birthDate')?.hasError('required') && employeeFormGroup.get('birthDate')?.touched) {
+                  <div class="text-danger">
+                    Birth Date is required
+                  </div>
+                }
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="startDate" class="form-label">Start Date</label>
+                <input type="date" class="form-control" id="startDate" formControlName="startDate">
+                @if (employeeFormGroup.get('startDate')?.hasError('required') && employeeFormGroup.get('startDate')?.touched) {
+                  <div class="text-danger">
+                    Start Date is required
+                  </div>
+                }
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="jobTitle" class="form-label">Job Title</label>
+            <input type="text" class="form-control" id="jobTitle" formControlName="jobTitle">
+            @if (employeeFormGroup.get('jobTitle')?.hasError('required') && employeeFormGroup.get('jobTitle')?.touched) {
+              <div class="text-danger">
+                Job Title is required
+              </div>
+            }
+          </div>
+
+          <div class="mb-3">
+            <label for="photo" class="form-label">Photo</label>
+            <input type="file" class="form-control" id="photo" formControlName="photo">
+          </div>
+
+          @if (operation === EmployeeOperations.Create) {
+            <p class="add-address-option" (click)="addAddress()">Add Address</p>
+          }
+
+          <h5>Addresses</h5>
+          <div formArrayName="addresses">
+            @for (address of addresses.controls; track $index) {
+              <p>Address {{$index + 1}}</p>
+              <div [formGroupName]="$index">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                      <label for="addressLine1" class="form-label">Address Line 1</label>
+                      <input type="text" class="form-control" id="addressLine1" formControlName="addressLine1">
+                      @if (address.get('addressLine1')?.hasError('required') && address.get('addressLine1')?.touched) {
+                        <div class="text-danger">
+                          Address Line 1 is required
+                        </div>
+                      }
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                      <label for="addressLine2" class="form-label">Address Line 2</label>
+                      <input type="text" class="form-control" id="addressLine2" formControlName="addressLine2">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="mb-3">
+                      <label for="city" class="form-label">City</label>
+                      <input type="text" class="form-control" id="city" formControlName="city">
+                      @if (address.get('city')?.hasError('required') && address.get('city')?.touched) {
+                        <div class="text-danger">
+                          City is required
+                        </div>
+                      }
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="mb-3">
+                      <label for="state" class="form-label">State</label>
+                      <input type="text" class="form-control" id="state" formControlName="state">
+                      @if (address.get('state')?.hasError('required') && address.get('state')?.touched) {
+                        <div class="text-danger">
+                          State is required
+                        </div>
+                      }
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="mb-3">
+                      <label for="zipCode" class="form-label">Zip Code</label>
+                      <input type="text" class="form-control" id="zipCode" formControlName="zipCode">
+                      @if (address.get('zipCode')?.hasError('required') && address.get('zipCode')?.touched) {
+                        <div class="text-danger">
+                          zipCode is required
+                        </div>
+                      }
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                      <label for="countryIsoCode" class="form-label">Country</label>
+                      <select class="form-select" id="countryIsoCode" formControlName="countryIsoCode">
+                        <option value="">Select Country</option>
+                        @for (country of countryList; track country.code) {
+                          <option [value]="country.code">{{country.name}}</option>
+                        }
+                      </select>
+                      @if (address.get('countryIsoCode')?.hasError('required') && address.get('countryIsoCode')?.touched) {
+                        <div class="text-danger">
+                          Country is required
+                        </div>
+                      }
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                      <label for="addressTypeId" class="form-label">Address Type</label>
+                      <select class="form-select" id="addressTypeId" formControlName="addressTypeId">
+                        <option value="">Select Type</option>
+                        @for (addressType of addressTypeList; track addressType.id) {
+                          <option [value]="addressType.id">{{addressType.name}}</option>
+                        }
+                      </select>
+                      @if (address.get('addressTypeId')?.hasError('required') && address.get('addressTypeId')?.touched) {
+                        <div class="text-danger">
+                          Address Type is required
+                        </div>
+                      }
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="container">
+                <div class="row justify-content-center">
+                  <div [ngClass]="responsiveClasses">
+                    <hr>
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+}
+

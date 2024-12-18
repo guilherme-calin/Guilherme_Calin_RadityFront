@@ -1,0 +1,14 @@
+<div class="header-container">
+  <div class="avatar-container"
+       placement="bottom"
+       [ngbPopover]="popOverContent"
+       popoverTitle="Options">
+    <img src="/avatar_resized_2.png" alt="Avatar">
+  </div>
+</div>
+
+<ng-template #popOverContent>
+  <ul>
+    <li (click)="logout()">Logout</li>
+  </ul>
+</ng-template>

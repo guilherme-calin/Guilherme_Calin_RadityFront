@@ -1,0 +1,7 @@
+@for (toast of toastService.toasts; track toast) {
+  <ngb-toast
+    [header]="toast.header" [autohide]="true" [delay]="toast.delay"
+    (hidden)="toastService.remove(toast)"
+    [class]="toast.type === ToastClassType.Error ? 'bg-danger text-light' : 'bg-success text-light'"
+  >{{ toast.body }}</ngb-toast>
+}
