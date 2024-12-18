@@ -1,6 +1,6 @@
 # MyEmployee
 
-This repository contains the setup for a frontend coding exercise created with Nest.js framework as an admission test for the company Radity.
+This repository contains the setup for a frontend coding exercise created with Angular2 framework as an admission test for the company Radity.
 
 The project consists of a Employee management application, named MyEmployee.
 
