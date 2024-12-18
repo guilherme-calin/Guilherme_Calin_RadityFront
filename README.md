@@ -8,6 +8,10 @@ Please setup and run the backend project before running this frontend project.
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.5.
 
+## Prerequisites:
+- Node.js v20 or later: https://nodejs.org/en/download/prebuilt-installer
+- npm v6.14.4: (usually comes bundled with Node.js installation)
+
 ## Development server
 
 To start a local development server, run:
